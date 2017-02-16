@@ -3,8 +3,8 @@
           p.content as post_content, 
           c.content as comment_content,
           tags
-          from post p 
-          join comment c on c.parent_id = p.id  
+          from blog_post p 
+          join blog_comment c on c.parent_id = p.id  
           WHERE p.id = :postId
           order by c.id DESC
         ";
