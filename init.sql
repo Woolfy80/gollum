@@ -1,29 +1,20 @@
-CREATE TABLE blog.user
-(
-  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  email VARCHAR(255) NOT NULL,
-  hash CHAR(32) NOT NULL
-);
-CREATE UNIQUE INDEX user_id_uindex ON blog.user (id);
-CREATE UNIQUE INDEX user_email_uindex ON blog.user (email);
-ALTER TABLE blog.user COMMENT = 'admins and black list functions';
+CREATE TABLE `blog_post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text,
+  `status` enum('new','open','closed') NOT NULL DEFAULT 'new',
+  `tags` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='posts';
 
-CREATE TABLE blog.post
-(
-  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  title VARCHAR(255) NOT NULL,
-  content TEXT,
-  status ENUM("new", "open", "closed") DEFAULT "new" NOT NULL,
-  tags TEXT DEFAULT NULL
-);
-CREATE UNIQUE INDEX post_id_uindex ON blog.post (id);
-ALTER TABLE blog.post COMMENT = 'posts';
-
-CREATE TABLE blog.comment
-(
-  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  parent_id INT(11) NOT NULL,
-  content TEXT DEFAULT NULL,
-  email VARCHAR(255) NOT NULL
-);
-CREATE UNIQUE INDEX commnet_id_uindex ON blog.comment (id);
+CREATE TABLE `blog_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `content` text,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `commnet_id_uindex` (`id`),
+  KEY `blog_comment_parent_id_fk` (`parent_id`),
+  CONSTRAINT `blog_comment_parent_id_fk` FOREIGN KEY (`parent_id`) REFERENCES `blog_post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
