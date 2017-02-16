@@ -19,11 +19,11 @@ CREATE TABLE blog.post
 CREATE UNIQUE INDEX post_id_uindex ON blog.post (id);
 ALTER TABLE blog.post COMMENT = 'posts';
 
-CREATE TABLE blog.commnet
+CREATE TABLE blog.comment
 (
   id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   parent_id INT(11) NOT NULL,
   content TEXT DEFAULT NULL,
   email VARCHAR(255) NOT NULL
 );
-CREATE UNIQUE INDEX commnet_id_uindex ON blog.commnet (id);
+CREATE UNIQUE INDEX commnet_id_uindex ON blog.comment (id);

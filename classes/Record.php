@@ -17,4 +17,8 @@ class Record
          */
 
     }
+
+    private function fetchAll() {
+
+    }
 }

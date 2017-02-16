@@ -24,3 +24,6 @@ function tag($name, $src, $ending=true) {
     return "<$name>$src" . ($ending ? "</$name>" : "");
 }
 
+$db = new Database();
+
+
