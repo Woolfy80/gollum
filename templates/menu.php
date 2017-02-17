@@ -15,6 +15,9 @@
         <h1>Gollum blog editors aria</h1>
 
         <p>
+            <button onclick="window.location.href = 'index.php'">
+                Go home
+            </button>
             <button onclick="window.location.href = 'create.php'">
                 Create new post
             </button>

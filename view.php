@@ -4,7 +4,7 @@
           c.content as comment_content,
           tags
           from blog_post p 
-          join blog_comment c on c.parent_id = p.id  
+          left join blog_comment c on c.parent_id = p.id  
           WHERE p.id = :postId
           order by c.id DESC
         ";
@@ -26,7 +26,7 @@
         echo tag("li",
             tag("div",
                 tag("span", $comment['email']) .
-                " say:"
+                " said:"
 
             ).
             tag("div",
