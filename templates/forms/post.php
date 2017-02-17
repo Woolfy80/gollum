@@ -1,12 +1,17 @@
+<?php
+    if(!isset($post)) {
+        $post = $_POST;
+    }
+?>
 <form action='' method='post'>
 
     <p><label>Title</label><br />
-        <input type="text" name="title" value="<?= $_POST['title']?>">
+        <input type="text" name="title" value="<?= $post['title']?>">
     </p>
 
     <p><label>Content</label><br />
         <textarea name='content' >
-            <?= $_POST['content']?>
+            <?= $post['content']?>
         </textarea>
     </p>
 

@@ -3,6 +3,14 @@
 require_once("../includes/config.php");
 require_once("../templates/header.php");
 
+try {
+    $connect = $db->db->prepare("SELECT * FROM blog_post WHERE id = :postId");
+    $connect->execute(array(':postID' => $_GET['id']));
+    $post = $connect->fetch();
+} catch(PDOException $e) {
+    echo $e->getMessage();
+}
+
 if(isset($_POST['submit'])){
     $_POST = array_map( 'stripslashes', $_POST );
     extract($_POST);
@@ -17,13 +25,16 @@ if(isset($_POST['submit'])){
     if(!isset($error)){
         try {
             $stmt = $db->db->
-                prepare('INSERT INTO blog_post (title, content) 
-                            VALUES (:postTitle, :postContent)')->
+                prepare('
+                  UPDATE blog_post SET 
+                      title = :postTitle, 
+                      content = :postContent  
+                      WHERE id = :postID')->
                 execute([
-                ':postTitle' => $title,
-                ':postContent' => $content,
-            ]);
-            header('Location: index.php?action=created');
+                    ':postTitle' => $title,
+                    ':postContent' => $content,
+                ]);
+            header('Location: index.php?action=updated');
             exit;
         } catch(PDOException $e) {
             echo $e->getMessage();

@@ -1,9 +1,7 @@
             <div class='clear'></div>
             <hr />
             <div>
-                <center>
-                    <p> Edit this footer with careful!! </p>
-                </center>
+                <?php include("../templates/menu.php"); ?>
             </div>
         </div>
     </body>

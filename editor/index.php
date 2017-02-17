@@ -8,14 +8,14 @@
     }
 ?>
 
-<?php require_once('../templates/menu.php');?>
+<?php require_once('../templates/header.php');?>
 
 <?php
     if(isset($_GET['action'])){
         echo '<center><h3>Post '.$_GET['action'].'.</h3></center>';
     }
 ?>
-
+<center>
 <table>
     <tr>
         <th>ID</th>
@@ -54,8 +54,12 @@
                         <?= $post['comment_count']?>
                     </td>
                     <td class="actions">
-                        <a href="edit-post.php?id=<?= $post['id'] ?>">Edit</a> |
-                        <a href="javascript:deletepost('<?= $post['id'] ?>','<?= $post['title']?>')">Delete</a>
+                        <button onclick="window.location.href = 'update.php?id=<?= $post['id'] ?>'">
+                            Edit
+                        </button>
+                        <button onclick="deletepost(<?= $post['id']?>, <?= $post['title']?>)">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             <?php endforeach;
@@ -64,6 +68,7 @@
         }
     ?>
 </table>
+</center>
 <script language="JavaScript" type="text/javascript">
     function deletepost(id, title) {
         if (confirm("Are you sure you want to delete \n'" + title + "'"))             {
