@@ -4,4 +4,5 @@
 .htgroup
 jquery.js
 includes/config.php
+editor/.ht*
 
